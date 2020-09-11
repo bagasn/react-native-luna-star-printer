@@ -13,7 +13,7 @@ import android.provider.MediaStore;
 import android.text.TextPaint;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.StaticLayout;
 import android.text.Layout;
 import android.util.Base64;
@@ -583,7 +583,24 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
                 } catch (IOException e) {
 
                 }
-            } else if (command.hasKey("appendBitmapText")){
+            }  else if (command.hasKey("appendBase64Image")){
+              String base64String = command.getString("appendBase64Image");
+              boolean diffusion = (command.hasKey("diffusion")) ? command.getBoolean("diffusion") : true;
+              int width = (command.hasKey("width")) ? command.getInt("width") : 576;
+              boolean bothScale = (command.hasKey("bothScale")) ? command.getBoolean("bothScale") : true;
+              
+              ICommandBuilder.BitmapConverterRotation rotation = (command.hasKey("rotation")) ? getConverterRotation(command.getString("rotation")) : getConverterRotation("Normal");
+              byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+              Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
+              if(command.hasKey("absolutePosition")){
+                  int position =  command.getInt("absolutePosition");
+                  builder.appendBitmapWithAbsolutePosition(bitmap, diffusion, width, bothScale, rotation, position);
+              }else if(command.hasKey("alignment")){
+                  ICommandBuilder.AlignmentPosition alignmentPosition = getAlignment(command.getString("alignment"));
+                  builder.appendBitmapWithAlignment(bitmap, diffusion, width, bothScale, rotation, alignmentPosition);
+              }else builder.appendBitmap(bitmap, diffusion, width, bothScale, rotation);
+              
+          } else if (command.hasKey("appendBitmapText")){
                 int fontSize = (command.hasKey("fontSize")) ? command.getInt("fontSize") : 25;
                 boolean diffusion = (command.hasKey("diffusion")) ? command.getBoolean("diffusion") : true;
                 int width = (command.hasKey("width")) ? command.getInt("width") : 576;
