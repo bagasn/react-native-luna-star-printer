@@ -126,7 +126,7 @@ Note: asterisk (*) indicates a required parameter
 
 The `portDiscovery(type, success, error)` Find available printers
 
-| Parameter | Description | Type/Example |
+| Paremeter | Description | Type/Example |
 | ----------- | -------- | ---------- |
 | type* | Port types are: 'All', 'Bluetooth', 'USB', 'LAN' | String |
 
@@ -134,7 +134,7 @@ The `portDiscovery(type, success, error)` Find available printers
 
 The `checkStatus(portName, emulation)` returns the current status of the printer, as well as model number and firmware information. *Checking status of a printer while connected to that printer can produce unexpected results.*
 
-| Parameter | Description | Type/Example |
+| Paremeter | Description | Type/Example |
 | ----------- | -------- | ---------- |
 | port* | Printer port name i.e BT:StarMicronics | String: "TCP:192.168.1.1" |
 | emulation* | Emulation type depending on the printer model | String: [Emulation](#emulation) |
@@ -144,7 +144,7 @@ The `checkStatus(portName, emulation)` returns the current status of the printer
 
 The `print(emulation, CommandsArray, portName)` Sends an Array of commands to the command buffer using the Android ICommandBuilderInterface or iOS ISCBBuilderInterface
 
-| Parameter | Description | Type/Example |
+| Paremeter | Description | Type/Example |
 | ----------- | -------- | ---------- |
 | emulation* | Emulation type depending on the printer model | String: [Emulation](#emulation) |
 | CommandsArray* | Each command in the array should be an instance of the [PrintCommand Object](#printcommand-object)  | Array:  [{append:"text"}, {"openCashDrawer: 1"}] |
@@ -300,8 +300,7 @@ componentDidMount() {
 | QrCodeModel: string | Property to be used with the appendQrCode command. Choose the format of the return value defined in  [QrCodeModel](#qrcodemodel). Example: ```{appendQrCode:'{BStar', QrCodeModel:'No1'}``` |
 | QrCodeLevel: string |Property to be used with the appendQrCode command. Choose the format of the return value defined in  [QrCodeLevel](#qrcodelevel) Example: ```{appendQrCode:'{BStar', QrCodeLevel:'H'}``` |
 | cell: number | Property to be used with the appendQrCode command. QRCode Cell size. Default 4. Example: ```{appendQrCode:'{BStar', cell:8}``` |
-| appendBitmap: string |Print command of the bitmap is generated and added to the command buffer. Takes a string image URI. This can be obtained via the camera or photo library or as a static resource saved on the phone memory. Additional Properties: diffusion, width, bothScale, rotation, absolutePosition, alignment. Example: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true}``` Example with absolutePosition: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true, absolutePosition: 40 }``` Example with alignment: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true, alignment:"Center" }``` |
-| appendBitmapText: string | Property to print text as a bitmap image. Takes a string that you want converted to a bitmap. Additional properties: width, font, fontSize, bothScale, alignment. Example: ```{appendBitmapText:text, fontSize:32, alignment:"Center"}```
+| appendBitmap: string; |Print command of the bitmap is generated and added to the command buffer. Takes a string image URI. This can be obtained via the camera or photo library or as a static resource saved on the phone memory. Additional Properties: diffusion, width, bothScale, rotation, absolutePosition, alignment. Example: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true}``` Example with absolutePosition: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true, absolutePosition: 40 }``` Example with alignment: ```{appendBitmap:uri, diffusion: true, width:576, bothScale: true, alignment:"Center" }``` |
 |   diffusion: boolean | Property to be used with the appendBitmap command. Random dither: true = Valid, false = Invalid. Default true. Example: ```{appendBitmap:uri, diffusion: false } ``` |
 | bothScale: boolean| Property to be used with the appendBitmap command. Height is changed according to the conversion rate of the width property. true = Valid, false = Invalid. Default true. Example:  ```{appendBitmap:uri, bothScale: true }``` |
 | rotation: string|Property to be used with the appendBitmap command. Choose the format of the return value defined in  [BitmapConverterRotation](#bitmapconverterrotation) Example: ```{appendBitmap:uri, rotation:'Left90'}```
